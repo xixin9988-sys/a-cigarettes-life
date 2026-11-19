@@ -5,6 +5,7 @@ import { GameEngine } from './core/Game';
 import { ConsoleLogger } from './core/GameLogger';
 import { formatMoney } from './core/format';
 import { UIManager } from './ui/UIManager';
+import { IntroOverlay } from './ui/IntroOverlay';
 import { AudioManager } from './audio/AudioManager';
 import { setSceneSession } from './scenes/session';
 import { createPhaserConfig } from './scenes/config';
@@ -19,6 +20,8 @@ declare global {
     };
   }
 }
+
+let activeIntro: IntroOverlay | null = null;
 
 function hideBootOverlay(): void {
   const overlay = document.getElementById('boot-overlay');
@@ -38,6 +41,10 @@ function showBootError(error: unknown): void {
 }
 
 async function boot(): Promise<void> {
+  // The studio intro (public/beginning.html) starts immediately and covers the boot screen.
+  const intro = new IntroOverlay();
+  activeIntro = intro;
+
   const logger = new ConsoleLogger({ minLevel: 'info' });
   const content = new ContentRegistry(CONTENT_PACK);
   const validationErrors = content.validate();
@@ -124,7 +131,12 @@ async function boot(): Promise<void> {
   };
   requestAnimationFrame(frame);
 
-  ui.showMainMenu();
+  // Enter the game only after the intro has finished (or was skipped).
+  void intro.whenDone().then(() => {
+    activeIntro = null;
+    ui.showMainMenu();
+    logger.info('Intro complete - entering the main menu.');
+  });
   const state = game.getState();
   logger.info('A Cigarette\'s Life booted. Player money: ' + formatMoney(state.player.money));
 
@@ -149,5 +161,7 @@ async function boot(): Promise<void> {
 
 boot().catch((error) => {
   console.error(error);
+  activeIntro?.finish(true);
+  activeIntro = null;
   showBootError(error);
 });

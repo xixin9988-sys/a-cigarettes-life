@@ -6,6 +6,18 @@
     <title>A Cigarette's Life</title>
     <link rel="icon" href="./favicon.ico" sizes="32x32" />
     <link rel="icon" href="./favicon.png" type="image/png" sizes="32x32" />
+    <script>
+      // Pre-paint intro bypass for automated runs / power users: ?skipIntro=1
+      (function () {
+        try {
+          if (new URLSearchParams(window.location.search).has('skipIntro')) {
+            document.documentElement.classList.add('skip-intro');
+          }
+        } catch (_error) {
+          /* ignore */
+        }
+      })();
+    </script>
     <style>
       html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #1a1a1f; overflow: hidden; }
       #game-root { width: 100vw; height: 100vh; position: relative; }
@@ -17,9 +29,36 @@
       #boot-overlay.hidden { display: none; }
       .boot-title { font-size: 28px; letter-spacing: 2px; margin-bottom: 10px; text-align: center; }
       .boot-sub { font-size: 13px; opacity: 0.7; text-align: center; }
+
+      /* ------------------------------------------------------------------ */
+      /* Studio intro (public/beginning.html) played once at game launch.    */
+      /* ------------------------------------------------------------------ */
+      #intro-overlay { position: fixed; inset: 0; z-index: 1000; background: #ffffff; overflow: hidden; }
+      #intro-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #ffffff; }
+      #intro-skip { position: absolute; top: 16px; right: 18px; z-index: 2; cursor: pointer;
+        background: #ffffffdd; color: #555555; border: 1px solid #bbbbbb; border-radius: 4px;
+        padding: 6px 12px; font: 12px 'Segoe UI', Tahoma, Verdana, sans-serif; letter-spacing: 1px; }
+      #intro-skip:hover { color: #111111; border-color: #666666; background: #ffffff; }
+      #intro-hint { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 2;
+        color: #9a9a9a; font: 12px 'Segoe UI', Tahoma, Verdana, sans-serif; letter-spacing: 1px;
+        opacity: 0; animation: introHintIn 0.9s ease-out 3.4s forwards; pointer-events: none; white-space: nowrap; }
+      #intro-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; z-index: 2; background: #f0f0f0; }
+      #intro-progress-bar { height: 100%; width: 100%; transform-origin: left center; transform: scaleX(0);
+        background: linear-gradient(90deg, #000000 20%, #6a00ff 100%); animation: introProgress 5.2s linear forwards; }
+      #intro-overlay.intro-leaving { opacity: 0; transition: opacity 0.65s ease; pointer-events: none; }
+      #intro-overlay.intro-hidden { display: none; }
+      .skip-intro #intro-overlay { display: none !important; }
+      @keyframes introHintIn { to { opacity: 1; } }
+      @keyframes introProgress { to { transform: scaleX(1); } }
     </style>
   </head>
   <body>
+    <div id="intro-overlay" aria-label="Synthelix studio intro">
+      <iframe id="intro-frame" src="./beginning.html" title="Synthelix" scrolling="no"></iframe>
+      <button id="intro-skip" type="button">跳过 SKIP</button>
+      <div id="intro-hint">点击任意处进入游戏 · click to continue</div>
+      <div id="intro-progress"><div id="intro-progress-bar"></div></div>
+    </div>
     <div id="game-root">
       <div id="boot-overlay">
         <div>

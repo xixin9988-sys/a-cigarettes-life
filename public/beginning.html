@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthelix</title>
+    <style>
+        /* 基础页面设置 */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff; /* 纯白底色 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* 公司名字容器 */
+        .logo-container {
+            font-size: 6rem; /* 字体大小，可根据屏幕调整 */
+            font-weight: 900;
+            letter-spacing: 2px;
+            user-select: none;
+        }
+
+        /* 单个字母的基础样式和动画定义 */
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(40px) scale(0.8);
+            /* 跳动动画：使用 cubic-bezier 让弹跳更自然 */
+            animation: jumpIn 0.8s cubic-bezier(0.25, 1.2, 0.5, 1) forwards;
+        }
+
+        /* 黑到紫的渐变文字 */
+        .gradient-text {
+            background: linear-gradient(135deg, #000000 20%, #6a00ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* 兼容性后备 */
+        }
+
+        /* 棕色文字 */
+        .brown-text {
+            color: #654321; /* 深棕色 */
+        }
+
+        /* 弹跳动画关键帧 */
+        @keyframes jumpIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-15px) scale(1.05);
+            }
+            70% {
+                transform: translateY(5px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 为每个字母设置不同的延迟时间，达到一个个跳出来的效果 (总耗时约2.5s) */
+        .letter:nth-child(1) { animation-delay: 0.1s; }
+        .letter:nth-child(2) { animation-delay: 0.3s; }
+        .letter:nth-child(3) { animation-delay: 0.5s; }
+        .letter:nth-child(4) { animation-delay: 0.7s; }
+        .letter:nth-child(5) { animation-delay: 0.9s; }
+        .letter:nth-child(6) { animation-delay: 1.1s; }
+        .letter:nth-child(7) { animation-delay: 1.3s; }
+        .letter:nth-child(8) { animation-delay: 1.5s; }
+        .letter:nth-child(9) { animation-delay: 1.7s; }
+
+        /* 底部健康提示语 */
+        .subtitle {
+            margin-top: 50px;
+            font-size: 1.2rem;
+            color: #888888;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 2.5s; /* 等待字母跳完后再出现 */
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        /* 提示语淡入动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 移动端适配，防止文字过大超出屏幕 */
+        @media (max-width: 768px) {
+            .logo-container {
+                font-size: 3.5rem;
+            }
+            .subtitle {
+                font-size: 0.9rem;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 公司名字 -->
+    <div class="logo-container">
+        <span class="letter gradient-text">S</span>
+        <span class="letter gradient-text">y</span>
+        <span class="letter gradient-text">n</span>
+        <span class="letter gradient-text">t</span>
+        <span class="letter gradient-text">h</span>
+        <span class="letter brown-text">e</span>
+        <span class="letter brown-text">l</span>
+        <span class="letter brown-text">i</span>
+        <span class="letter brown-text">x</span>
+    </div>
+
+    <!-- 底部提示语 -->
+    <div class="subtitle">
+        Smoking is harmful to your health; cut down on smoking.
+    </div>
+
+</body>
+</html>

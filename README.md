@@ -11,6 +11,26 @@ is resolved by one unified deterministic probability engine. The world keeps run
 are away: NPCs work and socialise, shops trade, prices move, crops grow and events unfold,
 simulated in a Web Worker and summarised when you return.
 
+## 一键启动（Windows）
+
+双击项目根目录的 **`启动游戏.bat`**（或 `start-game.bat`）。启动器会：
+
+1. 检查 Node.js / npm（首次运行缺少 `node_modules` 时自动执行 `npm install`）；
+2. 在 3000（被占用时自动顺延到下一个空闲端口）启动本地游戏服务；
+3. 等待游戏就绪后用默认浏览器打开；
+4. 游戏先播放 **Synthelix 开场动画**（`public/beginning.html`），动画结束或点击跳过后进入主菜单。
+
+关闭启动器打开的“A Cigarette's Life - game server”命令行窗口即可结束游戏服务。
+
+命令行等价方式：
+
+    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/launch-game.ps1
+    # 只启动服务、不自动打开浏览器：
+    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/launch-game.ps1 -NoBrowser
+
+开场动画在每次启动时播放；点击画面任意处、按 Enter/Space/Esc 或点击右上角“跳过 SKIP”可跳过。
+自动化/无头运行可使用 `http://localhost:3000/?skipIntro=1` 直接进入主菜单。
+
 ## Quick start
 
 Requirements: Node.js 20+ (tested on Node 24.21.0) and a modern browser with Web Worker,
@@ -36,8 +56,9 @@ then run the acceptance playthrough:
     npx vite preview --port 4173 --host localhost
     node scripts/acceptance-playthrough.mjs
 
-The script uses the installed Google Chrome (documented path in the script) and the
-playwright-core devDependency. It boots the game, creates a life, moves/talks/shops/fishes/farms/
+The script uses the installed Google Chrome (documented path in the script), the
+playwright-core devDependency, and appends `?skipIntro=1` so the studio intro does not
+intercept the automated flow. It boots the game, creates a life, moves/talks/shops/fishes/farms/
 crafts, saves + reloads, runs a real Web Worker offline catch-up and hidden-tab background chunk,
 ends the life and starts the next generation. Evidence is written to smoke/: acceptance-results.json,
 acceptance-console.log and 25 screenshots (smoke/acceptance-*.png). The independent verdict is in

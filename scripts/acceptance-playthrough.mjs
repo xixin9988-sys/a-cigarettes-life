@@ -24,7 +24,8 @@ import path from 'node:path';
 
 const NL = String.fromCharCode(10);
 const CHROME = process.env.ACCEPTANCE_CHROME || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
-const BASE_URL = process.env.ACCEPTANCE_URL || 'http://localhost:4173/';
+// The studio intro must not intercept automated interactions: skip it explicitly.
+const BASE_URL = process.env.ACCEPTANCE_URL || 'http://localhost:4173/?skipIntro=1';
 const PREFIX = process.env.ACCEPTANCE_PREFIX || 'acceptance';
 const ROOT = process.cwd();
 const SMOKE_DIR = path.join(ROOT, 'smoke');
