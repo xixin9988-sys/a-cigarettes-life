@@ -30,7 +30,7 @@ import { WORLD_CONFIG } from './WorldConfig';
 import { gameTimeToSimSeconds, simSecondsToGameTime } from './TimeUtil';
 import { addItemToInventory } from './InventoryUtil';
 import { createRelationship, refreshRelationshipStatus } from './RelationshipUtil';
-import { hashString } from './utils';
+import { configureIdGenerator, hashString } from './utils';
 import { HOME_INTERIOR_ID, LOC, interiorIdFor } from '../data/locations/ids';
 import { ITEM } from '../data/items/ids';
 import { SEASONS as SEASON_LIST } from './SharedTypes';
@@ -317,6 +317,7 @@ function createPlayerState(
     { itemId: ITEM.turnipSeed, quantity: 3, quality: 1 },
     { itemId: ITEM.breadLoaf, quantity: 2, quality: 2 },
     { itemId: ITEM.camera, quantity: 1, quality: 2 },
+    { itemId: ITEM.fishingRodBasic, quantity: 1, quality: 2 },
   ];
   for (const starter of starterItems) {
     addItemToInventory(inventory, starter.itemId, starter.quantity, {
@@ -409,6 +410,7 @@ export function createInitialGameState(options: CreateGameStateOptions): GameSta
   const content = options.content;
   const pack = content.pack;
   const seed = options.seed >>> 0;
+  configureIdGenerator(seed);
   const clock = createClockState(seed);
   const startTime = simSecondsToGameTime(clock.simTimeSeconds);
 
@@ -514,7 +516,7 @@ export function createInitialGameState(options: CreateGameStateOptions): GameSta
       year: startTime.year,
       weather: 'clear',
       previousWeather: 'clear',
-      nextWeatherChangeAt: clock.simTimeSeconds + 4 * 60 * 60,
+      nextWeatherChangeAt: clock.simTimeSeconds + 4 * 60,
       windSpeed: 0.18,
       windDirectionDeg: seededRange(seed, 'wind-dir', 0, 360),
       humidity: 0.48,
@@ -624,6 +626,7 @@ export function createInitialGameState(options: CreateGameStateOptions): GameSta
       lastSaveRealMs: Date.now(),
       pendingSummary: null,
       lastOfflineSimTime: clock.simTimeSeconds,
+      lastProcessedSimTime: clock.simTimeSeconds,
       offlineLockToken: null,
     },
     flags: { tutorial_seen: false, first_day: true },

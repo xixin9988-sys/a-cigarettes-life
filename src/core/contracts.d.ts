@@ -1106,6 +1106,8 @@ export interface PendingOfflineState {
   lastSaveRealMs: number;
   pendingSummary: OfflineSummary | null;
   lastOfflineSimTime: number;
+  /** Sim time of the last applied offline settlement (idempotency lock). */
+  lastProcessedSimTime: number;
   offlineLockToken: string | null;
 }
 
@@ -1356,6 +1358,9 @@ export interface IWorldSystem extends ISystem {
   getCurrentLocationId(): LocationId;
   isIndoor(locationId: LocationId): boolean;
   travelTo(locationId: LocationId): ActionResult;
+  /** Discovery/secret unlocking used by the exploration system. */
+  discoverLocation(locationId: LocationId): ActionResult;
+  unlockLocation(locationId: LocationId): ActionResult;
   getTrainRoutes(): TrainRouteDef[];
   getTrainSchedule(fromLocationId: LocationId, toLocationId?: LocationId): TrainDepartureInfo[];
   buyTrainTicket(routeId: string): ActionResult;
@@ -1578,6 +1583,7 @@ export interface OfflineSimResult {
 }
 
 export interface BackgroundTickResult {
+  requestId: string;
   state: GameState;
   simTimeSeconds: number;
   elapsedMs: number;
@@ -1586,7 +1592,7 @@ export interface BackgroundTickResult {
 export type ToSimulationWorkerMessage =
   | { kind: 'init'; seed: number; packVersion: string }
   | { kind: 'offline'; request: OfflineSimRequest }
-  | { kind: 'background'; baseState: GameState; simDeltaSeconds: number }
+  | { kind: 'background'; requestId: string; baseState: GameState; simDeltaSeconds: number }
   | { kind: 'ping'; requestId: string }
   | { kind: 'shutdown' };
 
@@ -1712,12 +1718,14 @@ export type GameAction =
   | { type: 'collection:donate'; itemId: ItemId }
   | { type: 'save'; slotId?: string }
   | { type: 'load'; slotId: string }
+  | { type: 'time:rest'; hours: number }
   | { type: 'settings:update'; settings: Partial<GameSettings> };
 
 export interface IGameApi {
   getState(): Readonly<GameState>;
   getContent(): IContentRegistry;
   getClock(): IClock;
+  getEventBus(): IEventBus;
   getScreen(): GameScreen;
   setScreen(screen: GameScreen): void;
   dispatch(action: GameAction): ActionResult;
@@ -1732,8 +1740,17 @@ export interface IGameApi {
   getOfflineSummary(): OfflineSummary | null;
   acknowledgeOfflineSummary(): void;
   getLifeArchive(): ArchivedLife[];
+  getProbabilityDebug(): ProbabilityDebugInfo;
   isPlaying(): boolean;
   getSystems(): IGameSystems;
+}
+
+export interface ProbabilityDebugInfo {
+  seed: number;
+  streams: string[];
+  stats: ProbabilityStreamStats[];
+  recent: ProbabilityDecisionRecord[];
+  streamStates: Record<string, number[]>;
 }
 
 export interface IGameSystems {

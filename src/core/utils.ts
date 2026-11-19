@@ -55,17 +55,50 @@ export function deepClone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }
 
+/** Convenience alias for a JSON-safe deep clone (used by tests/tooling). */
+export function jsonClone<T>(value: T): T {
+  return deepClone(value);
+}
+
 export function toJsonValue<T>(value: T): JsonValue {
   return JSON.parse(JSON.stringify(value)) as JsonValue;
 }
 
 let idCounter = 0;
+let idToken = 's0';
 
-/** Creates a unique id for a new entity instance. Not used for probability decisions. */
+/**
+ * Configures the deterministic id generator for a new life/world. Ids derived this way are
+ * reproducible for the same seed (important for deterministic replays) while remaining unique.
+ */
+export function configureIdGenerator(seed: number): void {
+  idToken = (hashString('ids:' + (seed >>> 0)) >>> 0).toString(36);
+  idCounter = 0;
+}
+
+/** Advances the id counter past every already-persisted id so loaded saves never collide. */
+export function syncIdCounterFromState(state: unknown): void {
+  let json: string;
+  try {
+    json = JSON.stringify(state);
+  } catch {
+    return;
+  }
+  if (!json) return;
+  const pattern = new RegExp('_' + idToken + '_([0-9a-z]+)', 'g');
+  let match: RegExpExecArray | null = null;
+  let maximum = 0;
+  while ((match = pattern.exec(json)) !== null) {
+    const parsed = Number.parseInt(match[1] ?? '0', 36);
+    if (Number.isFinite(parsed) && parsed > maximum) maximum = parsed;
+  }
+  if (maximum > idCounter) idCounter = maximum;
+}
+
+/** Creates a deterministic, unique id for a new entity instance. Not used for probability decisions. */
 export function makeId(prefix: string): string {
   idCounter += 1;
-  const time = Date.now().toString(36);
-  return `${prefix}_${time}_${idCounter.toString(36)}`;
+  return `${prefix}_${idToken}_${idCounter.toString(36)}`;
 }
 
 export function hashString(value: string): number {

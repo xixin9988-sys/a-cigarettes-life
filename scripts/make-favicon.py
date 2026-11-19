@@ -1,0 +1,12 @@
+from PIL import Image, ImageDraw
+img = Image.new('RGBA', (32, 32), (0, 0, 0, 0))
+d = ImageDraw.Draw(img)
+d.rounded_rectangle((8, 20, 24, 30), radius=3, fill=(176, 122, 74, 255))
+d.rectangle((8, 4, 24, 21), fill=(247, 243, 232, 255))
+d.ellipse((13, 4, 19, 10), fill=(255, 122, 42, 255))
+d.ellipse((11, 13, 13, 15), fill=(90, 74, 58, 255))
+d.ellipse((19, 13, 21, 15), fill=(90, 74, 58, 255))
+d.arc((13, 16, 19, 21), 20, 160, fill=(90, 74, 58, 255), width=1)
+img.save('public/favicon.ico', sizes=[(32, 32)])
+img.save('public/favicon.png')
+print('favicon written')

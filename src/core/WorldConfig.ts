@@ -20,7 +20,10 @@ export const WORLD_CONFIG = {
     /** Maximum real hours of offline simulation processed in one go. */
     maxOfflineRealHours: 24 * 180,
     /** Real seconds -> simulated seconds multiplier for offline catch-up. */
-    offlineTimeScale: 1,
+    /** 1 real hour offline = 180 sim seconds = 3 in-game hours (so 24h real = 3 game days). */
+    offlineTimeScale: 0.05,
+    /** Hard cap of simulated game days processed in a single offline catch-up. */
+    maxOfflineGameDays: 14,
   },
   cigarette: {
     /** Game hours of full burn at 1x base rate with no modifiers. */
@@ -115,7 +118,7 @@ export const WORLD_CONFIG = {
     renderHeight: 720,
   },
   world: {
-    majorNpcCount: 12,
+    majorNpcCount: 14,
     residentNpcCount: 42,
     majorNpcRelationshipSeedMin: 1,
     maxRelationshipHistory: 40,
@@ -124,7 +127,7 @@ export const WORLD_CONFIG = {
     shortTermMemoryThreshold: 5,
   },
   population: {
-    initialNpcCount: 54,
+    initialNpcCount: 56,
   },
   social: {
     maxFriends: 20,
