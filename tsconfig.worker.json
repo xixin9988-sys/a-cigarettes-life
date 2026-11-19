@@ -1,0 +1,42 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2022",
+      "WebWorker"
+    ],
+    "types": []
+  },
+  "include": [
+    "src/core/contracts.d.ts",
+    "src/core/SharedTypes.ts",
+    "src/core/TimeUtil.ts",
+    "src/core/EventBus.ts",
+    "src/core/Clock.ts",
+    "src/core/SystemRegistry.ts",
+    "src/core/GameContext.ts",
+    "src/core/ContentRegistry.ts",
+    "src/core/utils.ts",
+    "src/core/WorldFactory.ts",
+    "src/core/systems/**/*.ts",
+    "src/workers/**/*.ts",
+    "src/probability/**/*.ts",
+    "src/simulation/**/*.ts",
+    "src/world/**/*.ts",
+    "src/npc/**/*.ts",
+    "src/economy/**/*.ts",
+    "src/gameplay/**/*.ts",
+    "src/social/**/*.ts",
+    "src/life/**/*.ts",
+    "src/data/**/*.ts"
+  ],
+  "exclude": [
+    "tests",
+    "src/ui",
+    "src/scenes",
+    "src/main.ts",
+    "src/core/Game.ts",
+    "src/core/GameBootstrap.ts",
+    "src/persistence"
+  ]
+}

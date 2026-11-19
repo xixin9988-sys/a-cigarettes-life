@@ -1,0 +1,31 @@
+{
+  "name": "a-cigarettes-life",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A Cigarette's Life - a probability-driven living world life simulation game",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src tests",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.worker.json --noEmit"
+  },
+  "dependencies": {
+    "phaser": "3.90.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^22.19.1",
+    "eslint": "^9.39.1",
+    "fake-indexeddb": "^6.2.8",
+    "prettier": "^3.6.2",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "5.4.21",
+    "vitest": "2.1.9"
+  }
+}
