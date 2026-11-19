@@ -2,6 +2,7 @@
   "name": "a-cigarettes-life",
   "version": "1.0.0",
   "private": true,
+  "license": "SEE LICENSE IN LICENSE.md",
   "type": "module",
   "main": "desktop/electron/main.cjs",
   "description": "A Cigarette's Life - a probability-driven living world life simulation game",

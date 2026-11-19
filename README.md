@@ -180,6 +180,23 @@ rather than shipped as large asset packs.
       electron-builder.yml  packaging config (portable + NSIS)
       test/smoke.cjs        shell smoke test (origin, IDB, module worker)
 
+## License
+
+**Source-available, non-commercial.** The code and the procedural art it generates are licensed
+under the [PolyForm Noncommercial License 1.0.0](LICENSE.md). In short:
+
+- **Allowed:** download, play, read, study, modify and share the code for any non-commercial
+  purpose - personal use, hobby projects, learning, research, teaching, and use by charities,
+  schools, public research bodies, public safety/health bodies, environmental organizations and
+  government institutions.
+- **Not allowed:** any commercial use - selling it, bundling it into a paid product, monetising
+  it with ads, or anything else intended for commercial advantage.
+- **If you redistribute** a copy or a modified version, ship the license text (or its URL) and
+  the `Required Notice:` line with it.
+
+Want to use it commercially? Open an issue describing what you have in mind and ask for a
+separate commercial license - that is the one thing the license does not grant you.
+
 ## Documentation
 
 - docs/PROJECT_BRIEF.md - game concept and non-negotiable requirements
