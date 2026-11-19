@@ -1,5 +1,8 @@
 # A Cigarette's Life / 香烟的一生
 
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue)](LICENSE.md)
+[![Tests: 941 passing](https://img.shields.io/badge/tests-941%20passing-brightgreen)](#quick-start)
+
 A complete 2D top-down, probability-driven **living world** life simulation for the browser.
 You play an anthropomorphic cigarette in Willowbrook village and Ashford City: farm, forage,
 fish, explore, craft, cook, build, decorate, work, run a shop, make friends, fall in love,
