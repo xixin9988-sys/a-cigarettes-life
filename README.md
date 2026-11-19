@@ -21,6 +21,7 @@ simulated in a Web Worker and summarised when you return.
 4. 游戏先播放 **Synthelix 开场动画**（`public/beginning.html`），动画结束或点击跳过后进入主菜单。
 
 关闭启动器打开的“A Cigarette's Life - game server”命令行窗口即可结束游戏服务。
+若启动异常，项目根目录的 `launcher.log` 会记录启动过程的每一步（已改用不依赖系统代理的本地 TCP 检测，避免启动卡住）。
 
 命令行等价方式：
 

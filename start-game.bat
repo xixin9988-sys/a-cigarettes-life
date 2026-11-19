@@ -5,6 +5,4 @@ if errorlevel 1 (
   echo.
   echo Launch failed. Please read the messages above.
   pause
-) else (
-  timeout /t 2 >nul
 )
