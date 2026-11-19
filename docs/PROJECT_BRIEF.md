@@ -8,7 +8,7 @@ uncertain outcome is resolved by one unified deterministic probability engine. T
 cigarette physically burns down (lengthRatio), soaks in rain, burns faster in wind,
 produces ash (usable as potash fertiliser and crafting pigment), and eventually burns out.
 
-Full requirements: `life.txt` (2900 lines) and
+Full requirements: the original `life.txt` design specification (2900 lines) and
 `code_artifact.txt` (file tree + algorithm specs v3.0).
 This brief distils the hard rules; read the relevant sections of those files for detail.
 

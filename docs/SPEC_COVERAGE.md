@@ -1,13 +1,13 @@
 # SPEC_COVERAGE - requirement-by-requirement audit
 
-**Project:** A Cigarette's Life / 香烟的一生 (root `repo-root`, Windows)
+**Project:** A Cigarette's Life / 香烟的一生 (repository root, Windows)
 **Auditor:** coverage agent (task-16), read-only audit
 **Audit time:** 2026-11-19 ~04:52 local. The repository was being edited concurrently by other
 agents while this audit ran (files under `src/`, `tests/`, `docs/` last modified 04:13-04:46);
 every claim below was re-checked against the tree as it stood at the verification run in
 [Verification](#verification-commands--results), 04:46-04:51.
 **Sources read:** `docs/agent_preamble.md`, `docs/PROJECT_BRIEF.md`, `docs/ARCHITECTURE.md`,
-`README.md`, the full 2,905-line specification `life.txt`
+`README.md`, the full 2,905-line original specification `life.txt`
 (sections 1-83, all 20 parts) and `code_artifact.txt`
 (418-line project/algorithm spec v3.0), plus the repository source, data, tests and docs.
 
@@ -408,7 +408,7 @@ Counts were measured at audit time by a temporary probe (outside the repo) impor
    all offline tests exercise the main-thread fallback; the postMessage bridge and worker
    message handling are only claimed by browser acceptance - and that report is missing
    (gap 1). Worker path should be browser-tested and recorded.
-5. **Stale verification artifact:** `repo-root\vitest-run.log` (34,337,732 bytes, mtime
+5. **Stale verification artifact:** `vitest-run.log` (34,337,732 bytes, mtime
    04:29:46) records the 04:28 run as **2 failed / 765 passed / 73 files** including a
    deleted `tests/qa/knownDefects.test.ts` and a determinism failure in
    `tests/qa/worldStability.test.ts`. The current tree passes 87/889 after the 04:37-04:46
@@ -436,7 +436,7 @@ Counts were measured at audit time by a temporary probe (outside the repo) impor
 
 # 21. Verification commands & results (run by this audit)
 
-Executed from `repo-root` on 2026-11-19 between 04:46:59 and ~04:53 local, while other agents
+Executed from the repository root on 2026-11-19 between 04:46:59 and ~04:53 local, while other agents
 were still touching `tests/ui/` and `src/scenes/` (last observed mtimes 04:44-04:46):
 
 ```text

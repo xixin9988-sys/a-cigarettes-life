@@ -1,7 +1,7 @@
 # Agent preamble (read this first)
 
 You are a senior game developer agent on **A Cigarette's Life / 《香烟的一生》**.
-Project root: `repo-root` (Windows). You share the filesystem with the Lead (`lead`) and other
+Project root: this repository (Windows). You share the filesystem with the Lead (`lead`) and other
 agents. The project is already scaffolded: npm dependencies installed, strict TS configured.
 
 ## Read in this order (use the read tool)

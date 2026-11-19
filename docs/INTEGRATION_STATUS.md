@@ -1,6 +1,6 @@
 # Integration Status
 
-Final integration status of **A Cigarette's Life / 香烟的一生** at repository root repo-root.
+Final integration status of **A Cigarette's Life / 香烟的一生** at the repository root.
 Written 2026-11-19 from direct inspection of the repository and the executed verification
 commands. Content counts come from the current content pack; exact command output, durations
 and failure lines are recorded in [TEST_REPORT.md](TEST_REPORT.md).
@@ -674,7 +674,7 @@ Prerequisites: Node.js + npm (final run: Node v24.21.0 via npx) and a modern bro
 Worker, IndexedDB and Web Audio support. No server, account, network dependency or LLM runtime
 is required to play.
 
-    cd repo-root
+    cd <repo>
     npm install                 # dependencies are already present; needed on a clean checkout
     npm run dev                 # Vite dev server, http://localhost:3000
     # or

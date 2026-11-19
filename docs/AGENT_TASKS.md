@@ -1,6 +1,6 @@
 # Agent task map and final completion status
 
-**A Cigarette's Life / 香烟的一生** - root repo-root. This file records how the parallel build
+**A Cigarette's Life / 香烟的一生** - project root: this repository. This file records how the parallel build
 was divided, what each task owned, and its final state. For per-module implementation detail
 and verified/known-issue status, read [INTEGRATION_STATUS.md](INTEGRATION_STATUS.md) and
 [TEST_REPORT.md](TEST_REPORT.md); this page is the ownership/completion record.

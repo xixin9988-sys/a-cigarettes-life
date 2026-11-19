@@ -1,6 +1,6 @@
 # Test Report - A Cigarette's Life / 香烟的一生
 
-Final, evidence-based test and verification report for the repository at repo-root.
+Final, evidence-based test and verification report for this repository.
 
 - **Report written:** 2026-11-19 (Europe/London), after the Lead declared the tree source-frozen.
 - **Authoritative verification run:** 2026-11-19T05:23:03Z -> 2026-11-19T05:24:09Z, on the frozen
@@ -29,7 +29,7 @@ individual file times (129.49 s of test time). All numbers below are from the ru
 
 ## 1. Exact commands and results
 
-Commands were run from repo-root, one after another, on an idle machine, measured with a
+Commands were run from the repository root, one after another, on an idle machine, measured with a
 stopwatch (durations include npx startup):
 
     npx tsc --noEmit                              # exit 0, 5.06 s
@@ -259,7 +259,7 @@ No test was skipped, quarantined or weakened to make the suite green; the only t
 
 ## 8. Reproducing the numbers
 
-    cd repo-root
+    cd <repo>
     npm install                 # only on a clean checkout; node_modules present here
     npx tsc --noEmit
     npx tsc -p tsconfig.worker.json --noEmit
