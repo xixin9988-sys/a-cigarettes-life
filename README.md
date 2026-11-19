@@ -32,6 +32,19 @@ simulated in a Web Worker and summarised when you return.
 开场动画在每次启动时播放；点击画面任意处、按 Enter/Space/Esc 或点击右上角“跳过 SKIP”可跳过。
 自动化/无头运行可使用 `http://localhost:3000/?skipIntro=1` 直接进入主菜单。
 
+## 桌面版（Electron，双击即玩）
+
+仓库内置了 Electron 外壳，可以打成 Windows 可执行文件，玩家电脑**不需要安装 Node.js**：
+
+    npm run desktop:start     # 本机验收：直接读 dist/，等价于打包后的效果
+    npm run desktop:pack      # 免安装目录 release/win-unpacked/
+    npm run desktop:portable  # 单文件绿色版 exe
+    npm run desktop:release   # 绿色版 + NSIS 安装包
+
+产物在 `release/`。外壳代码在 `desktop/`，游戏本体（`src/`）无需改动。
+端口 0 与 IndexedDB 存档 origin 的关系、preload 桥、打包配置、分发测试清单，见
+[`desktop/桌面版构建与分发指南.md`](desktop/桌面版构建与分发指南.md)。
+
 ## Quick start
 
 Requirements: Node.js 20+ (tested on Node 24.21.0) and a modern browser with Web Worker,
@@ -161,6 +174,11 @@ rather than shipped as large asset packs.
       ui/           DOM UI manager and all panels
       audio/        procedural Web Audio manager
       main.ts       bootstraps engine + DOM UI + Phaser + audio
+
+    desktop/
+      electron/     Electron main process, preload bridge, static server
+      electron-builder.yml  packaging config (portable + NSIS)
+      test/smoke.cjs        shell smoke test (origin, IDB, module worker)
 
 ## Documentation
 

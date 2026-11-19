@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "main": "desktop/electron/main.cjs",
   "description": "A Cigarette's Life - a probability-driven living world life simulation game",
+  "author": "Synthelix",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "npm run typecheck && vite build",
@@ -12,7 +14,12 @@
     "test:watch": "vitest",
     "lint": "eslint src tests",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "typecheck": "tsc --noEmit && tsc -p tsconfig.worker.json --noEmit"
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.worker.json --noEmit",
+    "desktop:dev": "electron . --dev-server=http://127.0.0.1:3000",
+    "desktop:start": "electron .",
+    "desktop:pack": "npm run build && electron-builder --win --dir --config desktop/electron-builder.yml",
+    "desktop:portable": "npm run build && electron-builder --win portable --config desktop/electron-builder.yml",
+    "desktop:release": "npm run build && electron-builder --win --config desktop/electron-builder.yml"
   },
   "dependencies": {
     "phaser": "3.90.0"
@@ -20,6 +27,8 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^22.19.1",
+    "electron": "^38.8.6",
+    "electron-builder": "^26.18.0",
     "eslint": "^9.39.1",
     "fake-indexeddb": "^6.2.8",
     "playwright-core": "^1.65.1",

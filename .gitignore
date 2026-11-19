@@ -2,6 +2,18 @@ node_modules/
 dist/
 coverage/
 *.log
+release/
+desktop/test/out/
 .DS_Store
 .vite/
 smoke/
+
+# local secrets / environment overrides - never commit these
+.env
+.env.*
+*.local
+*.pem
+*.key
+Thumbs.db
+.idea/
+.vscode/

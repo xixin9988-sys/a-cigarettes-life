@@ -1,0 +1,48 @@
+appId: com.synthelix.acigaretteslife
+productName: A Cigarette's Life
+copyright: Copyright © 2026 Synthelix
+
+directories:
+  output: release
+  buildResources: desktop/build
+
+# 只有「构建产物 dist」和「Electron 外壳」会进入 app.asar。
+# node_modules 被显式排除：外壳只用 Node 内置模块，Phaser 早已被 Vite 打进 dist/assets。
+files:
+  - dist/**/*
+  - desktop/electron/**/*
+  - package.json
+  - '!**/node_modules/**/*'
+
+asar: true
+compression: maximum
+removePackageScripts: true
+
+win:
+  target:
+    - target: portable
+      arch: [x64]
+    - target: nsis
+      arch: [x64]
+  artifactName: ${productName}-${version}-${arch}.${ext}
+  executableName: A Cigarette's Life
+  requestedExecutionLevel: asInvoker
+
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}
+  requestExecutionLevel: user
+
+nsis:
+  artifactName: ${productName}-${version}-setup.${ext}
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: A Cigarette's Life
+  uninstallDisplayName: A Cigarette's Life
+  deleteAppDataOnUninstall: false
+
+# 项目里没有原生模块，跳过重建可明显加快打包。
+npmRebuild: false
