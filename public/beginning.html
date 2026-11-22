@@ -80,39 +80,10 @@
         .letter:nth-child(8) { animation-delay: 1.5s; }
         .letter:nth-child(9) { animation-delay: 1.7s; }
 
-        /* 底部健康提示语 */
-        .subtitle {
-            margin-top: 50px;
-            font-size: 1.2rem;
-            color: #888888;
-            letter-spacing: 1px;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 2.5s; /* 等待字母跳完后再出现 */
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        /* 提示语淡入动画 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* 移动端适配，防止文字过大超出屏幕 */
         @media (max-width: 768px) {
             .logo-container {
                 font-size: 3.5rem;
-            }
-            .subtitle {
-                font-size: 0.9rem;
-                margin-top: 30px;
             }
         }
     </style>
@@ -130,11 +101,6 @@
         <span class="letter brown-text">l</span>
         <span class="letter brown-text">i</span>
         <span class="letter brown-text">x</span>
-    </div>
-
-    <!-- 底部提示语 -->
-    <div class="subtitle">
-        Smoking is harmful to your health; cut down on smoking.
     </div>
 
 </body>
